@@ -33,9 +33,15 @@
 <td>${Product.price }</td></tr>
 <tr><td>Quantity:</td>
 <td>${Product.quantity }</td></tr>
-<tr><td>AddToCart:</td>
-<td><a href="/bhanu/user/addtocart/${Product.product_id }">Submit</a>
-</td></tr>
+<tr><td><form action="addtocart/${Product.product_id}">
+<input type="number" name="quantity" max="${Product.quantity }" min="1" required>
+<input value="Add to cart" type="submit" />
+</form></td></tr>
+<tr><td>Feedbacks:</td>
+<td><a href="/bhanu/user/feedbacks/${Product.product_id}">show</a></td></tr>
+<tr><td>Give Feedbacks:</td>
+<td><a href="/bhanu/user/addfeedback/${Product.product_id}">Add</a></td></tr>
+
 </table></div>
 </c:forEach>
 </body>

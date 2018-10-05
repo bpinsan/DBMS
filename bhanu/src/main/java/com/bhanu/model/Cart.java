@@ -1,6 +1,6 @@
 package com.bhanu.model;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 
 public class Cart {
 
@@ -8,8 +8,10 @@ public class Cart {
 	private int Product_id;
 	@NotEmpty
 	private String Customer;
+	@Min(1)
+	@Max(5)
 	int Quantity;
-	
+	int Offer_id;
 	public Cart()
 	{
 		
@@ -32,4 +34,11 @@ public class Cart {
 	public void setQuantity(int quantity) {
 		Quantity = quantity;
 	}
+	public int getOffer_id() {
+		return Offer_id;
+	}
+	public void setOffer_id(int offer_id) {
+		Offer_id = offer_id;
+	}
+	
 }

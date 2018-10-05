@@ -1,8 +1,11 @@
 package com.bhanu;
 
+import java.security.Principal;
 import java.sql.ResultSet;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +18,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bhanu.dao.Cartdao;
 import com.bhanu.dao.Customerdao;
 import com.bhanu.dao.Employeedao;
+import com.bhanu.dao.Feedbackdao;
+import com.bhanu.dao.Mayreturndao;
 import com.bhanu.dao.Offerdao;
+import com.bhanu.dao.Orderdao;
 import com.bhanu.dao.Productdao;
+import com.bhanu.dao.Productfittingdao;
+import com.bhanu.model.Cart;
 import com.bhanu.model.Customer;
 import com.bhanu.model.Employee;
+import com.bhanu.model.Feedback;
+import com.bhanu.model.Mayreturn;
 import com.bhanu.model.Offer;
 import com.bhanu.model.Product;
+import com.bhanu.model.Productfitting;
+import com.bhanu.model.OrderItem;
+import com.bhanu.model.Order;
 
 @Controller
 @RequestMapping("/admin")
@@ -39,6 +53,21 @@ public class AdminController {
 	
 	@Autowired
 	public Customerdao customerdao;
+	
+	@Autowired 
+	Orderdao orderdao;
+	
+	@Autowired
+	Cartdao cartdao;
+	
+	@Autowired
+	Feedbackdao feedbackdao;
+	
+	@Autowired
+	Mayreturndao mayreturndao;
+	
+	@Autowired
+	Productfittingdao productfittingdao;
 	
 	@RequestMapping(value="/addproduct",method=RequestMethod.GET)
 	public String Addproduct(Model model)
@@ -200,4 +229,222 @@ public class AdminController {
 		}
 	}
 	
+	@RequestMapping("/orders")
+	public String getAllOrders(Model model)
+	{
+		List<Order> list=orderdao.getAllOrders();
+		model.addAttribute("list",list);
+		return "orders";
+	}
+	
+	@RequestMapping("/orderitems/{orderId}")
+	public String getOrderItems(@PathVariable(value="orderId") int orderId,Model model)
+	{
+		List<OrderItem> list=orderdao.getOrderItems(orderId);
+		Order order= new Order();
+		order=orderdao.getOrder(orderId);
+		model.addAttribute("order", order);
+		model.addAttribute("list",list);
+		return "mayreturn";
+	}
+	
+	@RequestMapping(value="/assignemployee/{orderId}",method=RequestMethod.GET)
+	public String assignEmployeE(Model model,HttpServletRequest request,@PathVariable(value="orderId") int orderId)
+	{
+		List<OrderItem> list=orderdao.getOrderItems(orderId);
+		model.addAttribute("list",list);
+		List<Employee> employees=employeedao.getAllEmployee();
+		model.addAttribute("employees",employees);
+		return "Adminorder";
+	}
+	
+	@RequestMapping(value="/assignemployee/{orderId}",method=RequestMethod.POST)
+	public String assignEmployee(Model model,HttpServletRequest request,@PathVariable(value="orderId") int orderId)
+	{
+		int empId=Integer.parseInt(request.getParameter("empId"));
+		orderdao.assignEmployee(orderId, empId);
+		return "redirect:/admin/unassignedorders";
+	}
+	
+	@RequestMapping("/unassignedorders")
+	public String getAllunassignedOrders(Model model)
+	{
+		List<Order> list=orderdao.getAllunassignedOrders();
+		model.addAttribute("list",list);
+		return "Unassignedorder";
+	}
+	
+	@RequestMapping("/employees")
+	public String allEmployees(Model model)
+	{
+		List<Employee> list=employeedao.getAllEmployee();
+		model.addAttribute("list",list);
+		return "Employees";
+	}
+	
+	@RequestMapping("/addorder")
+	public String Addorder()
+	{
+		return "Addorderadmin";
+	}
+	
+	@RequestMapping(value="Allproducts")
+	public ModelAndView Allproductadd()
+	{
+		ModelAndView  mv= new ModelAndView();
+		List<Product> list = productdao.GetAllProduct();
+		mv.addObject("list",list);
+		mv.setViewName("Allproductadmin");
+		return mv;
+	}
+	
+	@RequestMapping(value="addtocart/{product_id}",method=RequestMethod.GET)
+	public String addToCart(@PathVariable(value="product_id") int product_id,HttpServletRequest request,Model model)
+	{
+		Principal principal=request.getUserPrincipal();
+		String Username=principal.getName();
+		if(cartdao.isIncart(product_id, Username))
+			return "redirect:/admin/cart";
+		Cart cart=new Cart();
+		cart.setProduct_id(product_id);
+		cart.setCustomer(Username);
+		//int i=Integer.parseInt(request.getParameter("quantity"));
+		//productdao.UpdateQuantity(product_id,i);
+//		System.out.println(Integer.parseInt(request.getParameter("quantity")));
+		cart.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+		cartdao.addToCart(cart);
+		return "redirect:/admin/Allproducts";
+	}
+	
+	@RequestMapping("cart")
+	public String viewCart(Model model,HttpServletRequest request)
+	{
+		Principal principal=request.getUserPrincipal();
+		String Username=principal.getName();
+		List<Cart> list=cartdao.getCartItems(Username);
+		model.addAttribute("list",list);
+		model.addAttribute("price",cartdao.getPrice(Username));
+		model.addAttribute("net_price",cartdao.getPrice(Username));
+		List<Offer> offers=offerdao.getOffers();
+		model.addAttribute("offers",offers);
+		model.addAttribute("offer_id", 1);
+		return "Cart";
+	}
+	
+	
+	public String viewOfferCart(Model model,HttpServletRequest request,int offer_id)
+	{
+		Principal principal=request.getUserPrincipal();
+		String userId=principal.getName();
+		List<Cart> list=cartdao.getCartItems(userId);
+		model.addAttribute("list",list);
+		int price=cartdao.getPrice(userId);
+		model.addAttribute("price",price);
+		model.addAttribute("net_price",price-offerdao.GetOffer(offer_id).getDiscount()*price/100);
+		List<Offer> offers=offerdao.getOffers();
+		model.addAttribute("offers",offers);
+		model.addAttribute("offer_id", offer_id);
+		return "Cart";
+	}
+	
+	@RequestMapping("applyoffer")
+	public String applyOffer(Model model,HttpServletRequest request)
+	{
+		int offer_id=Integer.parseInt(request.getParameter("offer_id"));
+		if(offer_id==0)
+			offer_id=1;
+		model.addAttribute("offer_id",offer_id);
+		return viewOfferCart(model,request,offer_id); 
+	}
+	
+	
+	@RequestMapping("order/{net_price}")
+	public String placeOfferOrder(Model model,HttpServletRequest request,@PathVariable(value="net_price") int net_price)
+	{
+		String Username=request.getUserPrincipal().getName();
+		int orderId=orderdao.placeOrder(Username,cartdao.getPrice(Username),net_price,Integer.parseInt(request.getParameter("offer_id")));
+		List<Cart> list=cartdao.getCartItems(Username);
+		Iterator<Cart> itr=list.iterator();
+		while(itr.hasNext())
+		{
+			Cart cart=itr.next();
+			orderdao.addToOrder(orderId, cart.getProduct_id(),cart.getQuantity());
+			int count=productdao.GetProduct(cart.getProduct_id()).getQuantity();
+			count=cart.getQuantity();
+			if(count>=0)
+				productdao.UpdateQuantity(cart.getProduct_id(), count);
+			cartdao.removeFromCart(cart.getProduct_id(), Username);
+		}
+		return "redirect:/admin/orderitem/"+orderId;
+	}
+	
+	
+	@RequestMapping("/feedbacks/{product_id}")
+	public String getAllFeedback(@PathVariable(value="product_id") int product_id,Model model)
+	{
+		List<Feedback> list=feedbackdao.getFeedbacks(product_id);
+		model.addAttribute("list",list);
+		return "Feedbacks";
+	}
+	
+	@RequestMapping("/orderitem/{orderId}")
+	public String getOrderItem(@PathVariable(value="orderId") int orderId,Model model)
+	{
+		List<OrderItem> list=orderdao.getOrderItems(orderId);
+		Order order= new Order();
+		order=orderdao.getOrder(orderId);
+		model.addAttribute("order", order);
+		model.addAttribute("list",list);
+		return "mayreturn";
+	}
+	
+	@RequestMapping("/returnitem")
+	public String Addreturn(HttpServletRequest request)
+	{
+		Mayreturn mayreturn = new Mayreturn();
+		int product_id=Integer.parseInt(request.getParameter("product_id"));
+		int quantity=Integer.parseInt(request.getParameter("quantity"));
+		int order_id=Integer.parseInt(request.getParameter("order_id"));
+		String customer=request.getParameter("customer");
+		String deadline=request.getParameter("deadline");
+		int price=productdao.GetProduct(product_id).getPrice()*quantity;
+		mayreturn.setCustomer(customer);
+		mayreturn.setQuantity(quantity);
+		mayreturn.setDeadline(deadline);
+		mayreturn.setPrice(price);
+		mayreturn.setProduct_id(product_id);
+		mayreturndao.insert(mayreturn);
+		return "redirect:/admin/orderitem/"+order_id;
+	}
+	
+	@RequestMapping("/productfitting")
+	public String Productfiting(HttpServletRequest request)
+	{
+		Productfitting productfitting= new Productfitting();
+		int product_id=Integer.parseInt(request.getParameter("product_id"));
+		int quantity=Integer.parseInt(request.getParameter("quantity"));
+		int order_id=Integer.parseInt(request.getParameter("order_id"));
+		String customer=request.getParameter("customer");
+		String deadline=request.getParameter("deadline");
+		String details=request.getParameter("details");
+		productfitting.setCustomer(customer);
+		productfitting.setQuantity(quantity);
+		productfitting.setDeadline(deadline);
+		productfitting.setProduct_id(product_id);
+		productfitting.setDetails(details);
+		int status=0;
+		productfitting.setStatus(status);
+		productfittingdao.Insert(productfitting);
+		return "redirect:/admin/orderitem/"+order_id;
+	}
+	
+	@RequestMapping("searchCustomer")
+	public String SearchCustomer(Model model,HttpServletRequest request)
+	{
+		String Phoneno=request.getParameter("phoneno.");
+		List<Customer> list;
+		list=customerdao.Search(Phoneno);
+		model.addAttribute("list",list);
+		return "Customersearch";
+	}
 }

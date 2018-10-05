@@ -4,6 +4,7 @@ import javax.validation.constraints.NotEmpty;
 
 public class Employee {
 	@NotEmpty(message="Required")
+	int Employee_id;
 	private String Name;
 	int Salary;
 	String Area;
@@ -18,6 +19,15 @@ public class Employee {
 	{
 		
 	}
+	
+	public int getEmployee_id() {
+		return Employee_id;
+	}
+
+	public void setEmployee_id(int employee_id) {
+		Employee_id = employee_id;
+	}
+
 	public String getName() {
 		return Name;
 	}

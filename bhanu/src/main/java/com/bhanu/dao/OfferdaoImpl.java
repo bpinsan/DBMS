@@ -21,6 +21,10 @@ public class OfferdaoImpl implements Offerdao{
 	DataSource datasource;
 	@Autowired 
 	JdbcTemplate jdbctemplate;
+	
+	@Autowired
+	Productdao productdao;
+	
 	public void SaveOrUpdate(Offer offer) {
 		// TODO Auto-generated method stub
 		String sql="insert into Offer(Name,Discount,Status) values(?,?,?)";
@@ -29,7 +33,7 @@ public class OfferdaoImpl implements Offerdao{
 	}
 	public List<Offer> GetAllOffer() {
 		// TODO Auto-generated method stub
-		String sql="select * from Offer";
+		String sql="select * from Offer Where Offer_id>1";
 		List<Offer> offer=jdbctemplate.query(sql, new BeanPropertyRowMapper<Offer>(Offer.class));
 		return offer;
 	}
@@ -54,6 +58,35 @@ public class OfferdaoImpl implements Offerdao{
 		String sql="update Offer set Discount="+offer.getDiscount()+",Status="+offer.getStatus()+" where Offer_id="+offer.getOffer_id()+"";
 		jdbctemplate.update(sql,new Object[] {});
 	
+		
+	}
+	public List<Offer> getOffers() {
+		// TODO Auto-generated method stub
+		String sql="select * from Offer where Status and Offer_id>1";
+		List<Offer> offer=jdbctemplate.query(sql, new BeanPropertyRowMapper<Offer>(Offer.class));
+		return offer;
+	}
+	
+	public Boolean isEnabled(int offerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void deleteOffer(int offerId) {
+		// TODO Auto-generated method stub
+		String sql="update Offer set Status=0 where OfferId="+offerId;
+		jdbctemplate.update(sql);
+		
+	}
+	public void applyOffer(String userId, int offerId) {
+		// TODO Auto-generated method stub
+		String sql="update Cart set OfferId="+offerId+" where Username=\""+userId+"\"";
+		jdbctemplate.update(sql);
+		
+	}
+	public void switchStatus(int offerId) {
+		// TODO Auto-generated method stub
+		String sql="update Offer set Status= not Status where OfferId="+offerId;
+		jdbctemplate.update(sql);
 		
 	}
 

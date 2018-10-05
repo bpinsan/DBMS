@@ -50,6 +50,7 @@
 		<td>
 		<form:input path="Pincode" type="int" /> </td><!-- bind to user.name-->
 		<td><form:errors path="Pincode" /></td></tr>
+		
 		<tr>
 			<td></td>
 			<td><input type="submit" value="Submit" /></td>

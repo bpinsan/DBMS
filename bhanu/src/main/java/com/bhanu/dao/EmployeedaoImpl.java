@@ -1,8 +1,11 @@
 package com.bhanu.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.bhanu.model.Employee;
@@ -28,6 +31,14 @@ public class EmployeedaoImpl implements Employeedao{
 		// TODO Auto-generated method stub
 		
 		return null;
+	}
+
+
+	public List<Employee> getAllEmployee() {
+		String sql="select * from Employee";
+		List<Employee> list;
+		list=jdbctemplate.query(sql, new BeanPropertyRowMapper<Employee>(Employee.class));
+		return list;
 	}
 	
 	

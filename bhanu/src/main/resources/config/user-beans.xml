@@ -9,6 +9,11 @@
     <bean id="Employeedao" class="com.bhanu.dao.EmployeedaoImpl"/>
     <bean id="Offerdao" class="com.bhanu.dao.OfferdaoImpl"/>
     <bean id="Cartdao" class="com.bhanu.dao.CartdaoImpl"/>
+    <bean id="Orderdao" class="com.bhanu.dao.OrderdaoImpl"/>
+    <bean id="Feedbackdao" class="com.bhanu.dao.FeedbackdaoImpl"/>
+    <bean id="Contactdao" class="com.bhanu.dao.ContactdaoImpl"/>
+    <bean id="Mayreturndao" class="com.bhanu.dao.MayreturndaoImpl"/>
+    <bean id="Productfittingdao" class="com.bhanu.dao.ProductfittingdaoImpl"/>
     
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource" />

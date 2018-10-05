@@ -10,4 +10,5 @@ public interface Productdao {
 	public java.util.List<Product> GetAllProduct();
 	public Product GetProduct(int product_id);
 	public void Update(Product product);
+	public void UpdateQuantity(int Product_id,int Quantity);
 }

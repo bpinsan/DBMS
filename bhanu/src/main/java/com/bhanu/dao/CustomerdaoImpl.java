@@ -2,17 +2,17 @@ package com.bhanu.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.bhanu.model.Customer;
-import com.bhanu.model.User;
-import com.mysql.cj.xdevapi.Result;
 
 public class CustomerdaoImpl implements Customerdao{
 
@@ -36,8 +36,8 @@ public class CustomerdaoImpl implements Customerdao{
 
 	public void SaveOrUpdateCustomer(Customer customer) {
 		// TODO Auto-generated method stub
-		String sql="INSERT INTO Customer(Username,Name,Email,Gender,Details,Pincode) values(?,?,?,?,?,?)";
-		jdbctemplate.update(sql,new Object[] {customer.getUsername(),customer.getName(),customer.getEmail(),customer.getGender(),customer.getDetails(),customer.getPincode()});
+		String sql="INSERT INTO Customer(Username,Name,Email,Gender,Details,Pincode,Contact) values(?,?,?,?,?,?,?)";
+		jdbctemplate.update(sql,new Object[] {customer.getUsername(),customer.getName(),customer.getEmail(),customer.getGender(),customer.getDetails(),customer.getPincode(),customer.getContact()});
 	}
 
 	public Customer getUser(String username) {
@@ -67,12 +67,33 @@ public class CustomerdaoImpl implements Customerdao{
 				if(rs.next()) {
 					Customer customer = new Customer();
 					customer.setUsername(rs.getString("Username"));
+					customer.setName(rs.getString("Name"));
+					customer.setEmail(rs.getString("Email"));
+					customer.setDetails(rs.getString("Details"));
+					customer.setPincode(rs.getInt("Pincode"));
+					customer.setContact(rs.getString("Contact"));				
 					return customer;
 				}
 				return null;
 			}
 			
 		});
+	}
+
+	public void editProfile(Customer customer, String Username) {
+		// TODO Auto-generated method stub
+		String sql="update Customer set Name=?,Details=?,contact=?,Pincode=? where Username=?";
+		Object[] object= {customer.getName(),customer.getDetails(),customer.getContact(),customer.getPincode(),Username};
+		jdbctemplate.update(sql,object);
+		
+	}
+
+	public List<Customer> Search(String Phoneno) {
+		// TODO Auto-generated method stub
+		String sql="select * from Customer where Contact="+Phoneno;
+		List<Customer> list;
+		list=jdbctemplate.query(sql, new BeanPropertyRowMapper<Customer>(Customer.class));
+		return list;
 	}
 
 }

@@ -6,46 +6,36 @@
 <body>
     <c:if test="${pageContext.request.userPrincipal.name != null}">
             <form action="admin/addproduct" method="get">
-            <table>
-            <tr>
-            <td>Add Product: </td>
-            <td><input type="submit"> </td>
-            </tr>
-            </table>
+            Add Product: <input type="submit"> 
             </form>
+            
             <form action="admin/addemployee" method="get">
-            <table>
-            <tr>
-            <td>Add Employee: </td>
-            <td><input type="submit"> </td>
-            </tr>
-            </table>
+            Add Employee: <input type="submit"> 
             </form>
+            
             <form action="admin/addoffer" method="get">
-            <table>
-            <tr>
-            <td>Add Offer: </td>
-            <td><input type="submit"> </td>
-            </tr>
-            </table>
+            Add Offer: <input type="submit"> 
             </form>
+            
             <form action="admin/allproduct" method="get">
-            <table>
-            <tr>
-            <td>All Product: </td>
-            <td><input type="submit"> </td>
-            </tr>
-            </table>
+            All Product: 
+            <input type="submit"> 
             </form>
+            
             <form action="admin/alloffer" method="get">
-            <table>
-            <tr>
-            <td>All Offer: </td>
-            <td><input type="submit"> </td>
-            </tr>
-            </table>
+            All Offer: 
+            <input type="submit"> 
             </form>
-            <form action="admin/addcustomer" method="get">
+            <form action="/bhanu/admin/searchCustomer">
+            	Search Customer: <input type="text" name="phoneno.">
+            	<input type="submit">
+            </form>
+            
+            <a href="/bhanu/admin/orders">All Orders</a><br><br>
+            <a href="/bhanu/admin/unassignedorders">Assign Employee to orders</a><br><br>
+            <a href="/bhanu/admin/employees">All Employees</a><br><br>
+            <a href="/bhanu/admin/addorder">Add order</a><br><br>
+            <form action="/bhanu/admin/addcustomer" method="get">
 				<input type="submit" value="addcustomer"><br>
 			</form>
             <a

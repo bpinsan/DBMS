@@ -1,12 +1,14 @@
 package com.bhanu.model;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 
 public class Offer {
 	
 	int Offer_id;
-	@NotEmpty
+	@Size(min=1,max=25)
 	String Name;
+	@Min(0)
+	@Max(100)
 	int Discount;
 	int status;
 	

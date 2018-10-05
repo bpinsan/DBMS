@@ -5,7 +5,10 @@
 <html>
 <body>
        <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <a href="user/allproducts">All products</a><br>
+        <a href="/bhanu/user/allproducts">All products</a><br>
+        <a href="/bhanu/user/cart">cart</a><br>
+        <a href="/bhanu/user/allorders">Your orders</a><br>
+        <a href="/bhanu/user/profile">Profile</a><br>
         <a href="<c:url value="/j_spring_security_logout" />"> Logout</a>
     </c:if>
 </body>

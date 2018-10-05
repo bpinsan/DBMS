@@ -31,17 +31,18 @@ public class ProductdaoImpl implements Productdao{
 		List<Product> product=jdbctemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class));
 		return product;
 	}
-	public Product GetProduct(final int product_id) {
+	public Product GetProduct(int product_id) {
 		// TODO Auto-generated method stub
 		String sql="select * from Product where Product_id='"+product_id+"'";
 		return jdbctemplate.query(sql,new ResultSetExtractor<Product>() {		
 			public Product extractData(ResultSet rs) throws SQLException,DataAccessException{
 				if(rs.next()) {
 					Product product = new Product();
-					product.setProduct_id(product_id);
+					product.setProduct_id(rs.getInt("Product_id"));
 					product.setDiscount(rs.getInt("Discount"));
 					product.setQuantity(rs.getInt("Quantity"));
 					product.setMRP(rs.getInt("MRP"));
+					product.setPrice(rs.getInt("Price"));
 					return product;
 						}
 					return null;
@@ -53,6 +54,11 @@ public class ProductdaoImpl implements Productdao{
 		String sql="update Product set MRP="+product.getMRP()+", Discount="+product.getDiscount()+", Quantity="+product.getQuantity()+", Price ="+product.getPrice()+" where Product_id="+product.getProduct_id()+"";
 		jdbctemplate.update(sql,new Object[] {});
 		
+	}
+	public void UpdateQuantity(int Product_id, int Quantity) {
+		// TODO Auto-generated method stub
+		String sql="Update Product set Quantity=Quantity-"+Quantity+" where Product_id="+Product_id;
+		jdbctemplate.update(sql);
 	}
 	
 }
