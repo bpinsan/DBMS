@@ -15,7 +15,7 @@
 <h4>No Customer Available...</h4>
 </c:if>
 <c:forEach items="${list }" var="customer">
-		Username: ${customer.username }<br>
+		User name: ${customer.username }<br>
 		Name: ${customer.name }<br><br>
 
 </c:forEach>

@@ -15,13 +15,8 @@
 <h4>No feedback available for this item...</h4>
 </c:if>
 <c:forEach items="${list }" var="feedback">
-<div style="float:left;width:30%;margin-left:5%;background-color:red;margin-top:3%">
-<table>
-<tr><td>Id:</td>
-<td>${feedback.feedback_id }</td></tr>
-<tr><td>Content:</td>
-<td>${feedback.details }</td></tr>
-</table></div>
+Id:${feedback.feedback_id }<br>
+Content:${feedback.details }<br><br><br>
 </c:forEach>
 </body>
 </html>

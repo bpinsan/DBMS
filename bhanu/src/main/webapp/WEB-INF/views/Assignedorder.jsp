@@ -11,12 +11,18 @@
 </head>
 <body>
 
-Name:${Customer.name }<br>
-Address:${Customer.details }<br>
-contact:${Customer.contact }<br>
-Pin Code:${Customer.pincode }<br>
-<a href="/bhanu/user/addcontact">Add contacts</a><br>
-<a href="/bhanu/user/edit_profile">Edit profile</a><br>
+Name:${employee.name }<br>
+Salary:${employee.salary }<br>
+Working Area:${employee.area }<br><br><br>
 
+<c:if test="${empty list }">
+<div style="margin-left:5%;"><h3>No order is assigned to this employee...</h3></div>
+</c:if>
+<c:forEach items="${list }" var="order">
+Order id:${order.order_id }<br>
+Address:${order.details }<br>
+Amount :${order.total_price }<br>
+Net amount :${order.grand_total }<br><br><br>
+</c:forEach>
 </body>
 </html>

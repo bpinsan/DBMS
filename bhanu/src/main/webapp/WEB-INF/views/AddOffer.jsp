@@ -4,31 +4,31 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <form:form method="post" modelAttribute="offer" action="">
-<table>
+
 		
-		<tr>
-		<td>Name</td>
-		<td><form:input path="Name" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Name" /></td>
-		</tr>
 		
-		<tr>
-		<td>Discount</td>
-		<td><form:input path="Discount" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Discount" /></td>
-		</tr>
+		Name:
+		<form:input path="Name" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Name" /><br>
+		
+		
+		
+		Discount:
+		<form:input path="Discount" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Discount" /><br>
+		
 			
-		<tr>
-		<td>Status</td>
-		<td><form:input path="Status" type="int" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Status" /></td>
-		</tr>
 		
-		<tr>
-			<td></td>
-			<td><input type="submit" value="Submit" /></td>
-		</tr>
-		<tr>
-		<td>${error}</td>
-		</tr>
-		</table></form:form>
+		Status:
+		<form:input path="Status" type="int" /> <!-- bind to user.name-->
+		<form:errors path="Status" /><br>
+		
+		
+		
+			
+			<input type="submit" value="Submit" />
+		
+		
+		${error}
+		
+		</form:form>

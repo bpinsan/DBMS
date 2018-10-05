@@ -15,34 +15,26 @@
 <h4>No Products Available...</h4>
 </c:if>
 <c:forEach items="${list }" var="Product">
-<div style="float:left;width:30%;margin-left:5%;background-color:red;margin-top:3%">
-<table>
-<tr><td>Product_Id:</td>
-<td>${Product.product_id }</td></tr>
-<tr><td>Correspondence:</td>
-<td>${Product.correspondence }</td></tr>
-<tr><td>Category:</td>
-<td>${Product.category }</td></tr>
-<tr><td>Brand:</td>
-<td>${Product.brand }</td></tr>
-<tr><td>Type:</td>
-<td>${Product.type }</td></tr>
-<tr><td>Size:</td>
-<td>${Product.size }</td></tr>
-<tr><td>Price:</td>
-<td>${Product.price }</td></tr>
-<tr><td>Quantity:</td>
-<td>${Product.quantity }</td></tr>
-<tr><td><form action="addtocart/${Product.product_id}">
+
+Product_Id:${Product.product_id }<br>
+Correspondence:${Product.correspondence }<br>
+Category:${Product.category }<br>
+Brand:${Product.brand }<br>
+Type:${Product.type }<br>
+Size:${Product.size }<br>
+Price:${Product.price }<br>
+Quantity:${Product.quantity }<br><br>
+
+
+<form action="addtocart/${Product.product_id}">
 <input type="number" name="quantity" max="${Product.quantity }" min="1" required>
 <input value="Add to cart" type="submit" />
-</form></td></tr>
-<tr><td>Feedbacks:</td>
-<td><a href="/bhanu/user/feedbacks/${Product.product_id}">show</a></td></tr>
-<tr><td>Give Feedbacks:</td>
-<td><a href="/bhanu/user/addfeedback/${Product.product_id}">Add</a></td></tr>
+</form><br>
 
-</table></div>
+
+Feedbacks:<a href="/bhanu/user/feedbacks/${Product.product_id}">show</a><br>
+Give Feedbacks:<a href="/bhanu/user/addfeedback/${Product.product_id}">Add</a><br><br>
+
 </c:forEach>
 </body>
 </html>

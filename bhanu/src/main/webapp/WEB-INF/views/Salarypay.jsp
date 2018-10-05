@@ -3,7 +3,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,26 +10,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form:form action="" method="post" modelAttribute="record">
 
+Month:<form:input path="month" value="${month }"/><br>
+Year:<form:input path="year" value="${year }"/><br>
+Salary:<form:input path="salary" value="${salary }"/><br>
 
-<form action="/bhanu/admin/assignemployee/${orderId }" method="post" id="assign">
-<select name="empId">
-<c:forEach items="${employees }" var="employee">
-<option value="${employee.employee_id }">${employee.employee_id }  ${employee.name }</option>
-</c:forEach>
-</select>
 <input type="submit" value="submit">
-</form>
+</form:form>
 
-
-
-<c:forEach items="${list }" var="item">
-
-
-Product_id:${item.product_id }<br>
-Quantity:${item.quantity }<br><br><br>
-
-
-</c:forEach>
+<a href="/bhanu/admin/employeesalaryrecords/${employee_id }">Salary record</a>
 </body>
 </html>

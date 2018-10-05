@@ -3,7 +3,6 @@ package com.bhanu.model;
 import javax.validation.constraints.NotEmpty;
 
 public class Employee {
-	@NotEmpty(message="Required")
 	int Employee_id;
 	private String Name;
 	int Salary;
@@ -14,6 +13,7 @@ public class Employee {
 	String Joining_date;
 	String Worked_till;
 	String Email;
+	String Contact;
 	
 	public Employee()
 	{
@@ -83,5 +83,14 @@ public class Employee {
 	public void setEmail(String email) {
 		Email = email;
 	}
+
+	public String getContact() {
+		return Contact;
+	}
+
+	public void setContact(String contact) {
+		Contact = contact;
+	}
+	
 	
 }

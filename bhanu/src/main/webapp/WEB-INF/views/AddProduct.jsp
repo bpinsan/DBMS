@@ -4,63 +4,63 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 	<form:form method="post" modelAttribute="product" action="">
-		<table>
-		
-		<tr>
-		<td>Category</td>
-		<td><form:input path="Category" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Category" /></td>
-		</tr>
 		
 		
 		
-		<tr>
-		<td>Brand</td>
-		<td><form:input path="Brand" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Brand" /></td>
-		</tr>
+		Category: 
+		<form:input path="Category" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Category" /><br>
 		
-		<tr>
-		<td>Correspondence</td>
-		<td><form:input path="Correspondence" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Correspondence" /></td>
-		</tr>
 		
-		<tr>
-		<td>Type</td>
-		<td><form:input path="Type" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Type" /></td>
-		</tr>
 		
-		<tr>
-		<td>Size</td>
-		<td><form:input path="Size" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Size" /></td>
-		</tr>
 		
-		<tr>
-		<td>MRP</td>
-		<td><form:input path="MRP" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="MRP" /></td>
-		</tr>
 		
-		<tr>
-		<td>Discount</td>
-		<td><form:input path="Discount" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Discount" /></td>
-		</tr>
+		Brand:
+		<form:input path="Brand" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Brand" /><br>
 		
-		<tr>
-		<td>Quantity</td>
-		<td><form:input path="Quantity" type="int" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Quantity" /></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit" value="Submit" /></td>
-		</tr>
-		<tr>
-		<td>${error}</td>
-		</tr>
-		</table>
+		
+		
+		Correspondence:
+		<form:input path="Correspondence" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Correspondence" /><br>
+		
+		
+		
+		Type:
+		<form:input path="Type" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Type" /><br>
+		
+		
+		
+		Size:
+		<form:input path="Size" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Size" /><br>
+		
+		
+		
+		MRP:
+		<form:input path="MRP" type="text" /> <!-- bind to user.name-->
+		<form:errors path="MRP" /><br>
+		
+		
+		
+		Discount:
+		<form:input path="Discount" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Discount" /><br>
+		
+		
+		
+		Quantity:
+		<form:input path="Quantity" type="int" /> <!-- bind to user.name-->
+		<form:errors path="Quantity" /><br>
+		
+		
+			
+			<input type="submit" value="Submit" /><br>
+		
+		
+		${error}
+		
+		
 	</form:form>

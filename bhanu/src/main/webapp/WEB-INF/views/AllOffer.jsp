@@ -15,21 +15,11 @@
 <h4>No Products Available...</h4>
 </c:if>
 <c:forEach items="${list }" var="Offer">
-<div style="float:left;width:30%;margin-left:5%;background-color:red;margin-top:3%">
-<table>
-<tr><td>Offer_id:</td>
-<td>${Offer.offer_id }</td></tr>
-<tr><td>Name:</td>
-<td>${Offer.name }</td></tr>
-<tr><td>Discount:</td>
-<td>${Offer.discount }</td></tr>
-<tr><td>Status:</td>
-<td>${Offer.status }</td></tr>
-<tr><td>Update:</td>
-<td><a href="/bhanu/admin/updateoffer/${Offer.offer_id }">Update</a>
-</td></tr>
-
-</table></div>
+Offer_id:${Offer.offer_id }<br>
+Name:${Offer.name }<br>
+Discount:${Offer.discount }<br>
+Status:${Offer.status }<br>
+Update:<a href="/bhanu/admin/updateoffer/${Offer.offer_id }">Update</a><br><br><br>
 </c:forEach>
 </body>
 </html>

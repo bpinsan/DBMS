@@ -2,6 +2,7 @@ package com.bhanu;
 
 import java.security.Principal;
 import java.sql.ResultSet;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import com.bhanu.dao.Offerdao;
 import com.bhanu.dao.Orderdao;
 import com.bhanu.dao.Productdao;
 import com.bhanu.dao.Productfittingdao;
+import com.bhanu.dao.Salaryrecorddao;
 import com.bhanu.model.Cart;
 import com.bhanu.model.Customer;
 import com.bhanu.model.Employee;
@@ -35,6 +37,7 @@ import com.bhanu.model.Mayreturn;
 import com.bhanu.model.Offer;
 import com.bhanu.model.Product;
 import com.bhanu.model.Productfitting;
+import com.bhanu.model.Salaryrecord;
 import com.bhanu.model.OrderItem;
 import com.bhanu.model.Order;
 
@@ -68,6 +71,10 @@ public class AdminController {
 	
 	@Autowired
 	Productfittingdao productfittingdao;
+	
+	@Autowired
+	Salaryrecorddao salaryrecorddao;
+	
 	
 	@RequestMapping(value="/addproduct",method=RequestMethod.GET)
 	public String Addproduct(Model model)
@@ -438,7 +445,7 @@ public class AdminController {
 		return "redirect:/admin/orderitem/"+order_id;
 	}
 	
-	@RequestMapping("searchCustomer")
+	@RequestMapping("/searchCustomer")
 	public String SearchCustomer(Model model,HttpServletRequest request)
 	{
 		String Phoneno=request.getParameter("phoneno.");
@@ -446,5 +453,66 @@ public class AdminController {
 		list=customerdao.Search(Phoneno);
 		model.addAttribute("list",list);
 		return "Customersearch";
+	}
+	
+	
+	@RequestMapping(value="/paysalary/{employee_id}",method=RequestMethod.GET)
+	public String Paysalry(Model model,@PathVariable(value="employee_id") int employee_id)
+	{
+		Calendar cal=Calendar.getInstance();
+		Salaryrecord record=new Salaryrecord();
+		record.setEmployee_id(employee_id);
+		if(salaryrecorddao.isPaid(employee_id, cal.get(cal.MONTH), cal.get(cal.YEAR)))
+		{
+			model.addAttribute("error","Already paid for this month");
+		}
+		model.addAttribute("month",cal.get(cal.MONTH));
+		model.addAttribute("year",cal.get(cal.YEAR));
+		model.addAttribute("salary",employeedao.getEmployee(employee_id).getSalary());
+		model.addAttribute("record",record);
+		return "Salarypay";
+	}
+	
+	
+	@RequestMapping(value="/paysalary/{employee_id}",method=RequestMethod.POST)
+	public String addRecord(Model model,@Valid @ModelAttribute("record") Salaryrecord record,BindingResult result)
+	{
+		if(result.hasErrors())
+		{
+			model.addAttribute("error","Incorrect Information filled");
+			model.addAttribute("record",record);
+			return "salaryForm";
+		}
+		else
+		{
+			salaryrecorddao.addRecord(record);
+			return "redirect:/admin/employeesalaryrecords/"+record.getEmployee_id();
+		}
+	}
+	
+	
+	@RequestMapping("/employeesalaryrecords/{employee_id}")
+	public String getRecords(Model model,@PathVariable(value="employee_id") int employee_id)
+	{
+		model.addAttribute("list",salaryrecorddao.getRecords(employee_id));
+		model.addAttribute("employee_id",employee_id);
+		return "Employeesalaryrecord";
+	}
+	
+	
+	@RequestMapping("/allsalaryrecords")
+	public String getAllRecords(Model model)
+	{
+		model.addAttribute("list",salaryrecorddao.getAllRecords());
+		return "Salaryrecords";
+	}
+	
+	
+	@RequestMapping("/orderemployee/{employee_id}")
+	public String getAssignedOrders(@PathVariable(value="employee_id") int employee_id,Model model)
+	{
+		model.addAttribute("list",orderdao.getAssignedOrders(employee_id));
+		model.addAttribute("employee",employeedao.getEmployee(employee_id));
+		return "Assignedorder"; 
 	}
 }

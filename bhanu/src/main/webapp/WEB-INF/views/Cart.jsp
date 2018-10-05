@@ -14,16 +14,15 @@
 <h3>You don't have any item in your cart...</h3>
 </c:if>
 <c:if test="${not empty list }">
-<h4>Total Amount is:${price }</h4>
-<h4>Net price:${net_price }</h4>
+Total Amount is:${price }<br>
+Net price:${net_price }<br>
 <form action="order/${net_price }">
-<input type="hidden" value="${offer_id }" name="offer_id">
-<input type="submit" value="Place order">
+<input type="hidden" value="${offer_id }" name="offer_id"><br>
+<input type="submit" value="Place order"><br><br>
 
 </form>
 <form action="applyoffer">
 <select name="offer_id" required="required">
-<option hidden="" value="0">none</option>
 <c:forEach items="${offers }" var="offer">
 <option value="${offer.offer_id }">${offer.name }</option>
 </c:forEach>
@@ -33,11 +32,11 @@
 </c:if>
 <c:forEach items="${list }" var="item">
 <div style="margin-left:10%;margin-right:10%;margin-top:3%;background-color:red;">
-<table>
-<tr><td>Quantity:</td><td>${item.quantity }</td></tr>
-<tr><td>Product_ID:</td><td>${item.product_id }</td></tr>
-<tr><td><a href="removefromcart/${item.product_id }">Remove from cart</a>
-</table></div>
+
+Quantity:${item.quantity }<br>
+Product_ID:${item.product_id }<br><br>
+<a href="removefromcart/${item.product_id }">Remove from cart</a>
+</div>
 </c:forEach>
 </body>
 </html>

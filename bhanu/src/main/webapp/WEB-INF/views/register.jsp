@@ -4,57 +4,57 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 	<form:form method="post" modelAttribute="customer" action="register">
-		<table><tr><td>
-		Username</td><td>
-		<form:input path="Username" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Username" /></td></tr>
 		
-		<tr><td>
-		Password</td><td>
-		<form:input path="Password" type="password" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Password" /></td></tr>
-		
-		<tr><td>Confirm password</td>
-		<td>
-		<form:input path="mPassword" type="password" /> </td><!-- bind to user.name-->
-		<td><form:errors path="mPassword" /></td></tr>
+		User name:
+		<form:input path="Username" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Username" /><br>
 		
 		
-		<tr><td>Name</td>
-		<td>
-		<form:input path="Name" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Name" /></td></tr>
+		Password:
+		<form:input path="Password" type="password" /> <!-- bind to user.name-->
+		<form:errors path="Password" /><br>
 		
-		<tr><td>Email</td>
-		<td>
-		<form:input path="Email" type="Email" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Email" /></td></tr>
+		Confirm password:
 		
-		<tr><td>Gender</td>
-		<td>
-		<form:input path="Gender" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Gender" /></td></tr>
-		<tr>
+		<form:input path="mPassword" type="password" /> <!-- bind to user.name-->
+		<form:errors path="mPassword" /><br>
 		
-		<tr><td>Contact</td>
-		<td>
-		<form:input path="Contact" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Contact" /></td></tr>
 		
-		<tr><td>Address</td>
-		<td>
-		<form:input path="Details" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Details" /></td></tr>
+		Name:
 		
-		<tr><td>Pincode</td>
-		<td>
-		<form:input path="Pincode" type="int" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Pincode" /></td></tr>
+		<form:input path="Name" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Name" /><br>
 		
-		<tr>
-			<td></td>
-			<td><input type="submit" value="Submit" /></td>
-			</tr>
-		<tr><td>${error}</td></tr>
-		</table>
+		Email:
+		
+		<form:input path="Email" type="Email" /> <!-- bind to user.name-->
+		<form:errors path="Email" /><br>
+		
+		Gender:
+		
+		<form:input path="Gender" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Gender" /><br>
+		
+		
+		Contact:
+		
+		<form:input path="Contact" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Contact" /><br>
+		
+		Address:
+		
+		<form:input path="Details" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Details" /><br>
+		
+		Pin code:
+		
+		<form:input path="Pincode" type="int" /> <!-- bind to user.name-->
+		<form:errors path="Pincode" /><br>
+		
+		
+			
+			<input type="submit" value="Submit" />
+			
+		${error}
+		
 	</form:form>

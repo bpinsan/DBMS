@@ -8,6 +8,6 @@
 </head>
 <body>
 	<a href="Allproducts">All products</a><br>
-	<a href="cart">My cart</a>
+	<a href="cart">My cart</a><br>
 </body>
 </html>

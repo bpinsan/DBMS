@@ -11,12 +11,12 @@
 </head>
 <body>
 <form action="" method="post" >
-<table>
-<tr><td>Name:</td><td><input name="name" value="${customer.name}" type="text"/></td></tr>
-<tr><td>Address:</td><td><input name="details" value="${customer.details}" type="text"/></td></tr>
-<tr><td>contact:</td><td><input name="contact" value="${customer.contact}" type="text"/></td></tr>
-<tr><td>Pincode:</td><td><input name="pincode" value="${customer.pincode}" type="text"/></td></tr>
-</table>
+
+Name:<input name="name" value="${customer.name}" type="text"/>
+Address:<input name="details" value="${customer.details}" type="text"/>
+contact:<input name="contact" value="${customer.contact}" type="text"/>
+Pin code:<input name="pincode" value="${customer.pincode}" type="text"/>
+
 <input type="submit" value="Save">
 </form>
 </body>

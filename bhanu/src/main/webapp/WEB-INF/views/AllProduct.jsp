@@ -15,29 +15,15 @@
 <h4>No Products Available...</h4>
 </c:if>
 <c:forEach items="${list }" var="Product">
-<div style="float:left;width:30%;margin-left:5%;background-color:red;margin-top:3%">
-<table>
-<tr><td>Product_Id:</td>
-<td>${Product.product_id }</td></tr>
-<tr><td>Correspondence:</td>
-<td>${Product.correspondence }</td></tr>
-<tr><td>Category:</td>
-<td>${Product.category }</td></tr>
-<tr><td>Brand:</td>
-<td>${Product.brand }</td></tr>
-<tr><td>Type:</td>
-<td>${Product.type }</td></tr>
-<tr><td>Size:</td>
-<td>${Product.size }</td></tr>
-<tr><td>Price:</td>
-<td>${Product.price }</td></tr>
-<tr><td>Quantity:</td>
-<td>${Product.quantity }</td></tr>
-<tr><td>Update:</td>
-<td><a href="/bhanu/admin/updateproduct/${Product.product_id }">Update</a>
-</td></tr>
-
-</table></div>
+Product_Id:${Product.product_id }<br>
+Correspondence:${Product.correspondence }<br>
+Category:${Product.category }<br>
+Brand:${Product.brand }<br>
+Type:${Product.type }<br>
+Size:${Product.size }<br>
+Price:${Product.price }<br>
+Quantity:${Product.quantity }<br>
+Update:<a href="/bhanu/admin/updateproduct/${Product.product_id }">Update</a><br><br><br>
 </c:forEach>
 </body>
 </html>

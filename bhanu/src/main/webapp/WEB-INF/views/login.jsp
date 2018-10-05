@@ -26,20 +26,20 @@
 
 	<form name='loginForm' action="<c:url value='login' />" method='POST'>
 
-		<table>
-			<tr>
-				<td>User:</td>
-				<td><input type='text' name='username' value=''></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><input type='password' name='password' /></td>
-			</tr>
-			<tr>
-				<td><input name="submit" type="submit" value="submit" /></td>
-				<td><input name="reset" type="reset" /></td>
-			</tr>
-		</table>
+		
+			
+				User:
+				<input type='text' name='username' value=''><br>
+			
+			
+				Password:
+				<input type='password' name='password' /><br>
+			
+			
+				<input name="submit" type="submit" value="submit" />
+				<input name="reset" type="reset" />
+			
+		
 
 	</form>
 </body>

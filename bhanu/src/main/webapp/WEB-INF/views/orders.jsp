@@ -11,7 +11,7 @@
 </head>
 <body>
 <c:forEach items="${list }" var="item">
-<a href="orderitems/${item.order_id }">${item.order_id}</a><br>
+<a href="/bhanu/admin/orderitems/${item.order_id }">${item.order_id}</a><br>
 Total amount:${item.grand_total };<br>
 Status:${item.status }<br><br><br>
 </c:forEach>

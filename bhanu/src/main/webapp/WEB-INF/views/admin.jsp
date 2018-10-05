@@ -5,24 +5,24 @@
 <html>
 <body>
     <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <form action="admin/addproduct" method="get">
+            <form action="/bhanu/admin/addproduct" method="get">
             Add Product: <input type="submit"> 
             </form>
             
-            <form action="admin/addemployee" method="get">
+            <form action="/bhanu/admin/addemployee" method="get">
             Add Employee: <input type="submit"> 
             </form>
             
-            <form action="admin/addoffer" method="get">
+            <form action="/bhanu/admin/addoffer" method="get">
             Add Offer: <input type="submit"> 
             </form>
             
-            <form action="admin/allproduct" method="get">
+            <form action="/bhanu/admin/allproduct" method="get">
             All Product: 
             <input type="submit"> 
             </form>
             
-            <form action="admin/alloffer" method="get">
+            <form action="/bhanu/admin/alloffer" method="get">
             All Offer: 
             <input type="submit"> 
             </form>

@@ -111,4 +111,11 @@ public class OrderdaoImpl implements Orderdao{
 		return list;
 	}
 
+	public List<Order> getAssignedOrders(int employee_id) {
+		// TODO Auto-generated method stub
+		String sql="select * from Orders where Employee="+employee_id;
+		return jdbctemplate.query(sql, new BeanPropertyRowMapper<Order>(Order.class));
+
+	}
+
 }

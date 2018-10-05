@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 	<form:form method="post" modelAttribute="contact" action="addcontact">
-		Contact:<form:input path="Contact" type="text" /> <!-- bind to user.name-->
+		Contact:<form:input path="Contact" type="text" /> 
 				<form:errors path="Contact" />
 			<input type="submit" value="Submit" />
 		${error}

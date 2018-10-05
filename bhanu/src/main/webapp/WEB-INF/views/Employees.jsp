@@ -15,7 +15,9 @@
 Name:${item.name }<br>
 Salary:${item.salary }<br>
 Working Area:${item.area }<br>
-<a href="orderemployee/${item.employee_id}">Orders assigned</a><br><br>
+Contact: ${item.salary }<br>
+<a href="/bhanu/admin/orderemployee/${item.employee_id}">Orders assigned</a>
+<a href="/bhanu/admin/paysalary/${item.employee_id}">Pay salary</a><br><br>
 </c:forEach>
 </body>
 </html>

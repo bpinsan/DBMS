@@ -9,6 +9,6 @@ import com.bhanu.model.Employee;
 public interface Employeedao {
 	@Autowired
 	public void Save(Employee employee);
-	public Employee getEmployee();
 	public List<Employee> getAllEmployee();
+	public Employee getEmployee(int employee_id);
 }

@@ -15,4 +15,5 @@ public interface Orderdao {
 	public void assignEmployee(int Order_Id,int Employee_id);
 	public Order getOrder(int Order_Id);
 	public List<Order> getAllunassignedOrders();
+	public List<Order> getAssignedOrders(int employee_id);
 }

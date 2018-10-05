@@ -21,7 +21,7 @@ public class SalaryrecorddaoImpl implements Salaryrecorddao{
 	@Autowired
 	JdbcTemplate jdbctemplate;
 	
-	public SalaryrecorddaoImpl(DataSource datsource)
+	public SalaryrecorddaoImpl(DataSource datasource)
 	{
 		this.jdbctemplate=new JdbcTemplate(datasource);
 	}

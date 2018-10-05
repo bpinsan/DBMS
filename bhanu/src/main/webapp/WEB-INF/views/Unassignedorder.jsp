@@ -11,15 +11,13 @@
 </head>
 <body>
 <c:forEach items="${list }" var="item">
-<div style="margin-left:10%;margin-right:10%;margin-top:3%;background-color:red;">
 
 
 <a href="assignemployee/${item.order_id }">${item.order_id}</a><br>
 
 Total amount:${item.grand_total }<br>
 
-Status:${item.status }
-</div>
+Status:${item.status }<br><br><br>
 </c:forEach>
 </body>
 </html>

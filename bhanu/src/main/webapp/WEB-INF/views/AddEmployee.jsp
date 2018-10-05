@@ -4,64 +4,71 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <form:form method="post" modelAttribute="employee" action="">
-<table>
-		
-		<tr>
-		<td>Name</td>
-		<td><form:input path="Name" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Name" /></td>
-		</tr>
+
 		
 		
+		Name:
+		<form:input path="Name" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Name" /><br>
 		
-		<tr>
-		<td>Salary</td>
-		<td><form:input path="Salary" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Salary" /></td>
-		</tr>
 		
-		<tr>
-		<td>Area</td>
-		<td><form:input path="Area" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Area" /></td>
-		</tr>
 		
-		<tr>
-		<td>Type</td>
-		<td><form:input path="Type" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Type" /></td>
-		</tr>
 		
-		<tr>
-		<td>Details</td>
-		<td><form:input path="Details" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Details" /></td>
-		</tr>
 		
-		<tr>
-		<td>Pincode</td>
-		<td><form:input path="Pincode" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Pincode" /></td>
-		</tr>
+		Salary:
+		<form:input path="Salary" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Salary" /><br>
 		
-		<tr>
-		<td>Joining_data</td>
-		<td><form:input path="Joining_date" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Joining_date" /></td>
-		</tr>
 		
-		<tr>
-		<td>Email</td>
-		<td><form:input path="Email" type="text" /> </td><!-- bind to user.name-->
-		<td><form:errors path="Email" /></td>
-		</tr>
-		<tr>
 		
-		<tr>
-			<td></td>
-			<td><input type="submit" value="Submit" /></td>
-		</tr>
-		<tr>
-		<td>${error}</td>
-		</tr>
-		</table></form:form>
+		Area:
+		<form:input path="Area" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Area" /><br>
+		
+		
+		
+		Type:
+		<form:input path="Type" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Type" /><br>
+		
+		
+		
+		Details:
+		<form:input path="Details" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Details" /><br>
+		
+		
+		
+		Pin code:
+		<form:input path="Pincode" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Pincode" /><br>
+		
+		
+		
+		Joining_data:
+		<form:input path="Joining_date" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Joining_date" /><br>
+		
+		
+		
+		Email:
+		<form:input path="Email" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Email" /><br>
+		
+		
+		
+		
+		Contact:
+		<form:input path="Contact" type="text" /> <!-- bind to user.name-->
+		<form:errors path="Contact" /><br>
+		
+		
+		
+		
+			
+			<input type="submit" value="Submit" />
+		
+		
+		${error}
+		
+		</form:form>
