@@ -10,14 +10,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-Order ID:${order.order_id}<br>
-Address:${order.details},${order.pincode}<br>
-Total amount:${order.total_price }<br>
-Amount paid:${order.grand_total }<br>
-<br>
 <c:forEach items="${list }" var="item">
-Product_ID:<a href="../product/${item.product_id }">${item.product_id }</a><br>
-Quantity:${item.quantity }<br><br>
+<a href="../orderitem/${item.order_id }">${item.order_id}</a><br>
+
+Total amount:${item.grand_total };<br>
+Address: ${item.details}<br>
+Status:${item.status }<br><br><br>
 </c:forEach>
 </body>
 </html>

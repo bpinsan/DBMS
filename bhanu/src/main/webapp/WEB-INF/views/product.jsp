@@ -3,7 +3,14 @@
 <html>
 <title>Product</title>
 <body>
-<h3> Hello ${user} </h3>
-His product is ${product}
+product_Id:${product.product_id }<br>
+Correspondence:${product.correspondence }<br>
+Category:${product.category }<br>
+Brand:${product.brand }<br>
+Type:${product.type }<br>
+Size:${product.size }<br>
+Price:${product.price }<br>
+Quantity:${product.quantity }<br><br>
+
 </body>
 </html>

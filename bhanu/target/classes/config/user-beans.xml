@@ -15,6 +15,7 @@
     <bean id="Mayreturndao" class="com.bhanu.dao.MayreturndaoImpl"/>
     <bean id="Productfittingdao" class="com.bhanu.dao.ProductfittingdaoImpl"/>
     <bean id="Salaryrecorddao" class="com.bhanu.dao.SalaryrecorddaoImpl"/>
+    <bean id="Wholesale_sellerdao" class="com.bhanu.dao.Wholesale_sellerdaoImpl"/>
     
     
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

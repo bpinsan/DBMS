@@ -15,6 +15,10 @@ Name:${Customer.name }<br>
 Address:${Customer.details }<br>
 contact:${Customer.contact }<br>
 Pin Code:${Customer.pincode }<br>
+Contacts:<br>
+<c:forEach items="${contacts}" var="item">
+	${item.contact } <a href="/bhanu/user/deletecontact/${item.contact_id }">Delete</a><br>
+</c:forEach><br>
 <a href="/bhanu/user/addcontact">Add contacts</a><br>
 <a href="/bhanu/user/edit_profile">Edit profile</a><br>
 

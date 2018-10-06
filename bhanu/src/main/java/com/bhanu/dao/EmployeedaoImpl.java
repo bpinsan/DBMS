@@ -55,11 +55,31 @@ public class EmployeedaoImpl implements Employeedao{
 					employee.setArea(rs.getString("Area"));
 					employee.setJoining_date(rs.getString("Joining_date"));
 					employee.setType(rs.getString("Type"));
+					employee.setEnabled(rs.getInt("enabled"));
 					return employee;
 				}
 				return null;
 			}	
 		});
+	}
+
+
+
+	public void UpdateStatus(int employee_id) {
+		// TODO Auto-generated method stub
+		String sql="update Employee set enabled = not enabled where Employee_id="+employee_id;
+		jdbctemplate.update(sql);
+		
+	}
+
+
+
+	public List<Employee> getAllAvailEmployee() {
+		// TODO Auto-generated method stub
+		String sql="select * from Employee where enabled and Type="+"'deliverer'";
+		List<Employee> list;
+		list=jdbctemplate.query(sql, new BeanPropertyRowMapper<Employee>(Employee.class));
+		return list;
 	}
 	
 	

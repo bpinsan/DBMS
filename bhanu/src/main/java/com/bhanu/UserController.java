@@ -1,6 +1,7 @@
 package com.bhanu;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class UserController {
 	@Autowired 
 	Contactdao contactdao;
 	
-	@RequestMapping(value="allproducts")
+	@RequestMapping(value="/allproducts")
 	public ModelAndView Allproduct()
 	{
 		ModelAndView  mv= new ModelAndView();
@@ -68,7 +69,15 @@ public class UserController {
 		return mv;
 	}	
 	
-	@RequestMapping(value="addtocart/{product_id}",method=RequestMethod.GET)
+	@RequestMapping("/product/{product_id}")
+	public String Product(@PathVariable("product_id") int product_id,Model model)
+	{
+		Product product=productdao.GetProduct(product_id);
+		model.addAttribute("product",product);
+		return "product";
+	}
+	
+	@RequestMapping(value="/addtocart/{product_id}",method=RequestMethod.GET)
 	public String addToCart(@PathVariable(value="product_id") int product_id,HttpServletRequest request,Model model)
 	{
 		Principal principal=request.getUserPrincipal();
@@ -78,15 +87,12 @@ public class UserController {
 		Cart cart=new Cart();
 		cart.setProduct_id(product_id);
 		cart.setCustomer(Username);
-		//int i=Integer.parseInt(request.getParameter("quantity"));
-		//productdao.UpdateQuantity(product_id,i);
-//		System.out.println(Integer.parseInt(request.getParameter("quantity")));
 		cart.setQuantity(Integer.parseInt(request.getParameter("quantity")));
 		cartdao.addToCart(cart);
 		return "redirect:/user/cart";
 	}
 	
-	@RequestMapping("cart")
+	@RequestMapping("/cart")
 	public String viewCart(Model model,HttpServletRequest request)
 	{
 		Principal principal=request.getUserPrincipal();
@@ -98,10 +104,12 @@ public class UserController {
 		List<Offer> offers=offerdao.getOffers();
 		model.addAttribute("offers",offers);
 		model.addAttribute("offer_id", 1);
+		model.addAttribute("details",customerdao.getCustomer(Username).getDetails());
+		model.addAttribute("pincode",customerdao.getCustomer(Username).getPincode());
 		return "Cart";
 	}
 	
-	@RequestMapping("removefromcart/{product_id}")
+	@RequestMapping("/removefromcart/{product_id}")
 	public String removeFromCart(@PathVariable(value="product_id") int product_id,HttpServletRequest request,Model model)
 	{
 		Principal principal=request.getUserPrincipal();
@@ -125,23 +133,28 @@ public class UserController {
 		return "Cart";
 	}
 	
-	@RequestMapping("applyoffer")
+	@RequestMapping("/applyoffer")
 	public String applyOffer(Model model,HttpServletRequest request)
 	{
 		int offer_id=Integer.parseInt(request.getParameter("offer_id"));
 		if(offer_id==0)
 			offer_id=1;
-		//String Username=request.getUserPrincipal().getName();
 		model.addAttribute("offer_id",offer_id);
+		String Username=request.getUserPrincipal().getName();
+		model.addAttribute("details",customerdao.getCustomer(Username).getDetails());
+		model.addAttribute("pincode",customerdao.getCustomer(Username).getPincode());
+		
 		return viewOfferCart(model,request,offer_id); 
-//		return "redirect:/cart";
 	}
 	
-	@RequestMapping("order/{net_price}")
+	@RequestMapping("/order/{net_price}")
 	public String placeOfferOrder(Model model,HttpServletRequest request,@PathVariable(value="net_price") int net_price)
 	{
 		String Username=request.getUserPrincipal().getName();
-		int orderId=orderdao.placeOrder(Username,cartdao.getPrice(Username),net_price,Integer.parseInt(request.getParameter("offer_id")));
+		String date=LocalDate.now().toString();
+		String details=request.getParameter("details");
+		int pincode=Integer.parseInt(request.getParameter("pincode"));
+		int orderId=orderdao.placeOrder(Username,cartdao.getPrice(Username),net_price,Integer.parseInt(request.getParameter("offer_id")),details,pincode,date);
 		List<Cart> list=cartdao.getCartItems(Username);
 		Iterator<Cart> itr=list.iterator();
 		while(itr.hasNext())
@@ -157,7 +170,7 @@ public class UserController {
 		return "redirect:/user/orderitems/"+orderId;
 	}
 	
-	@RequestMapping("allorders")
+	@RequestMapping("/allorders")
 	public String orders(Model model,HttpServletRequest request)
 	{
 		String Username=request.getUserPrincipal().getName();
@@ -165,7 +178,7 @@ public class UserController {
 		model.addAttribute("list",list);
 		return "orders";
 	}
-	@RequestMapping("orderitems/{orderId}")
+	@RequestMapping("/orderitems/{orderId}")
 	public String getOrderItems(Model model,@PathVariable(value="orderId") int orderId,HttpServletRequest request)
 	{
 		List<OrderItem> list=orderdao.getOrderItems(orderId);
@@ -178,14 +191,16 @@ public class UserController {
 	{
 		String Username=request.getUserPrincipal().getName();
 		Customer customer =customerdao.getCustomer(Username);
+		List<Contact> contacts= contactdao.Allcontact(Username);
 		model.addAttribute("Customer",customer);
+		model.addAttribute("contacts", contacts);
 		return "profile";
 	}
 	
 	@RequestMapping(value="/edit_profile", method=RequestMethod.GET)
 	public String editProfile(Model model,HttpServletRequest request)
 	{
-		Customer customer=customerdao.getUser(request.getUserPrincipal().getName());
+		Customer customer=customerdao.getCustomer(request.getUserPrincipal().getName());
 		model.addAttribute("customer",customer);
 		return "Editprofile";
 	}
@@ -199,22 +214,21 @@ public class UserController {
 		customer.setContact(request.getParameter("contact"));
 		customer.setPincode(Integer.parseInt(request.getParameter("pincode")));
 		customerdao.editProfile(customer,request.getUserPrincipal().getName());
-		return "redirect:/profile";
+		return "redirect:profile";
 	}
 	
-	@RequestMapping(value="addfeedback/{product_id}",method=RequestMethod.GET)
+	@RequestMapping(value="/addfeedback/{product_id}",method=RequestMethod.GET)
 	public String addFeedback(Model model,@PathVariable(value="product_id") int product_id,HttpServletRequest request)
 	{
 		Principal principal=request.getUserPrincipal();
 		Feedback feedback=new Feedback();
 		feedback.setProduct(product_id);
 		feedback.setCustomer(principal.getName());
-//		feedback.setDate=((Date)LocalDate.now());
 		model.addAttribute("feedback",feedback);
 		return "Addfeedback";
 	}
 	
-	@RequestMapping(value="addfeedback/{product_id}",method=RequestMethod.POST)
+	@RequestMapping(value="/addfeedback/{product_id}",method=RequestMethod.POST)
 	public String addfeedback(@Valid @ModelAttribute("Feedback") Feedback feedback,BindingResult result,Model model,@PathVariable(value="product_id") int product_id)
 	{
 		if(result.hasErrors())
@@ -255,5 +269,13 @@ public class UserController {
 		contact.setContact(request.getParameter("Contact"));
 		contactdao.Addcontact(contact);
 		return "redirect:profile";
+	}
+	
+	
+	@RequestMapping("/deletecontact/{contact_id}")
+	public String Deletecontact(@PathVariable("contact_id") int contact_id)
+	{
+		contactdao.deletecontact(contact_id);
+		return "redirect:../profile";
 	}
 }

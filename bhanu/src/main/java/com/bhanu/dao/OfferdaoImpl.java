@@ -62,7 +62,7 @@ public class OfferdaoImpl implements Offerdao{
 	}
 	public List<Offer> getOffers() {
 		// TODO Auto-generated method stub
-		String sql="select * from Offer where Status and Offer_id>1";
+		String sql="select * from Offer where Status and Offer_id>1 and Status";
 		List<Offer> offer=jdbctemplate.query(sql, new BeanPropertyRowMapper<Offer>(Offer.class));
 		return offer;
 	}

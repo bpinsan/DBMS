@@ -31,7 +31,7 @@ Quantity:${Product.quantity }<br>
 <input value="Add to cart" type="submit" />
 </form>
 
-
+Update:<a href="/bhanu/admin/updateproduct/${Product.product_id }">Update</a><br>
 Feedbacks:<a href="/bhanu/admin/feedbacks/${Product.product_id}">show</a><br><br><br><br>
 </c:forEach>
 </body>

@@ -35,6 +35,10 @@
             <a href="/bhanu/admin/unassignedorders">Assign Employee to orders</a><br><br>
             <a href="/bhanu/admin/employees">All Employees</a><br><br>
             <a href="/bhanu/admin/addorder">Add order</a><br><br>
+            <a href="/bhanu/admin/allcustomer">All customer</a><br><br>
+            <a href="/bhanu/admin/addseller">Add Wholesale_seller</a><br><br>
+            <a href="/bhanu/admin/allseller">All Wholesale_seller</a><br><br>
+            
             <form action="/bhanu/admin/addcustomer" method="get">
 				<input type="submit" value="addcustomer"><br>
 			</form>

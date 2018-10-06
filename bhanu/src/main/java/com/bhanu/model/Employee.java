@@ -14,6 +14,7 @@ public class Employee {
 	String Worked_till;
 	String Email;
 	String Contact;
+	int enabled;
 	
 	public Employee()
 	{
@@ -90,6 +91,14 @@ public class Employee {
 
 	public void setContact(String contact) {
 		Contact = contact;
+	}
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
 	}
 	
 	

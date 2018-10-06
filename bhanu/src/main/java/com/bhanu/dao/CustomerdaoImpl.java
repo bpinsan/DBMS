@@ -50,6 +50,7 @@ public class CustomerdaoImpl implements Customerdao{
 					Customer customer = new Customer();
 					customer.setUsername(rs.getString("Username"));
 					customer.setPassword(rs.getString("Password"));
+					customer.setEnabled(rs.getInt("enabled"));
 					return customer;
 				}
 				return null;
@@ -60,7 +61,7 @@ public class CustomerdaoImpl implements Customerdao{
 
 	public Customer getCustomer(String username) {
 		// TODO Auto-generated method stub
-		String sql = "select * from Customer where Username='"+username+"'";
+		String sql = "select * from USERS,Customer where Customer.Username='"+username+"'";
 		return jdbctemplate.query(sql,new ResultSetExtractor<Customer>() {
 			
 			public Customer extractData(ResultSet rs) throws SQLException,DataAccessException{
@@ -71,7 +72,8 @@ public class CustomerdaoImpl implements Customerdao{
 					customer.setEmail(rs.getString("Email"));
 					customer.setDetails(rs.getString("Details"));
 					customer.setPincode(rs.getInt("Pincode"));
-					customer.setContact(rs.getString("Contact"));				
+					customer.setContact(rs.getString("Contact"));
+					customer.setEnabled(rs.getInt("enabled"));
 					return customer;
 				}
 				return null;
@@ -94,6 +96,19 @@ public class CustomerdaoImpl implements Customerdao{
 		List<Customer> list;
 		list=jdbctemplate.query(sql, new BeanPropertyRowMapper<Customer>(Customer.class));
 		return list;
+	}
+
+	public List<Customer> Allcustomer() {
+		// TODO Auto-generated method stub
+		String sql="select * from Customer,USERS where Customer.Username=USERS.username and not Customer.Username='Admin'";
+		List<Customer> list= jdbctemplate.query(sql, new BeanPropertyRowMapper<Customer>(Customer.class));
+		return list;
+	}
+
+	public void Changestatus(String username) {
+		// TODO Auto-generated method stub
+		String sql="update USERS set enabled = not enabled where username='"+username+"'";
+		jdbctemplate.update(sql);
 	}
 
 }

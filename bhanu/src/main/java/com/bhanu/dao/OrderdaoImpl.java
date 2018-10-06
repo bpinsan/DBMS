@@ -25,10 +25,10 @@ public class OrderdaoImpl implements Orderdao{
 		this.jdbctemplate=new JdbcTemplate(datasource);
 	}
 	
-	public int placeOrder(String Username, int Total_price, int Grand_total, int Offer_id) {
+	public int placeOrder(String Username, int Total_price, int Grand_total, int Offer_id,String details,int pincode,String date) {
 		// TODO Auto-generated method stub
-		String sql1="insert into Orders set Customer=?,Total_price=?,Grand_total=?,Offer=?";
-		Object[] object= {Username,Total_price,Grand_total,Offer_id};
+		String sql1="insert into Orders set Customer=?,Total_price=?,Grand_total=?,Offer=?,Details=?,Pincode=?,Booking_date=?";
+		Object[] object= {Username,Total_price,Grand_total,Offer_id,details,pincode,date};
 		jdbctemplate.update(sql1,object);
 		String sql="select max(Order_id) from Orders where Customer='"+Username+"'";
 		Order maxOrder=jdbctemplate.query(sql, new ResultSetExtractor<Order>() {
@@ -92,6 +92,8 @@ public class OrderdaoImpl implements Orderdao{
 				if(rs.next())
 				{
 					Order order = new Order();
+					order.setDetails(rs.getString("Details"));
+					order.setPincode(rs.getInt("Pincode"));
 					order.setTotal_price(rs.getInt("Total_price"));
 					order.setGrand_total(rs.getInt("Grand_total"));
 					order.setEmployee(rs.getInt("Employee"));

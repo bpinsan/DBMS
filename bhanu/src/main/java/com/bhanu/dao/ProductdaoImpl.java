@@ -39,6 +39,11 @@ public class ProductdaoImpl implements Productdao{
 				if(rs.next()) {
 					Product product = new Product();
 					product.setProduct_id(rs.getInt("Product_id"));
+					product.setCorrespondence(rs.getString("Correspondence"));
+					product.setCategory(rs.getString("Category"));
+					product.setBrand(rs.getString("Brand"));
+					product.setType(rs.getString("Type"));
+					product.setSize(rs.getString("Size"));
 					product.setDiscount(rs.getInt("Discount"));
 					product.setQuantity(rs.getInt("Quantity"));
 					product.setMRP(rs.getInt("MRP"));

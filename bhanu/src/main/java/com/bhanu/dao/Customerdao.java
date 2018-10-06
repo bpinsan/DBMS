@@ -14,5 +14,6 @@ public interface Customerdao {
 	public Customer getCustomer(String username);
 	public void editProfile(Customer customer, String Username);
 	public List<Customer> Search(String Phoneno);
-
+	public List<Customer> Allcustomer();
+	public void Changestatus(String username);
 }

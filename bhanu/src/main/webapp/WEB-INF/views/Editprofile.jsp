@@ -12,10 +12,11 @@
 <body>
 <form action="" method="post" >
 
-Name:<input name="name" value="${customer.name}" type="text"/>
-Address:<input name="details" value="${customer.details}" type="text"/>
-contact:<input name="contact" value="${customer.contact}" type="text"/>
-Pin code:<input name="pincode" value="${customer.pincode}" type="text"/>
+Name:<input name="name" value="${customer.name}" type="text"/><br><br>
+Address:<input name="details" value="${customer.details}" type="text"/><br><br>
+contact:<input name="contact" value="${customer.contact}" type="text"/><br><br>
+Pin code:<input name="pincode" value="${customer.pincode}" type="text"/><br><br>
+E-mail:<input name="email" value="${customer.email}" type="text"/><br><br>
 
 <input type="submit" value="Save">
 </form>

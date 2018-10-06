@@ -16,8 +16,11 @@ Name:${item.name }<br>
 Salary:${item.salary }<br>
 Working Area:${item.area }<br>
 Contact: ${item.salary }<br>
-<a href="/bhanu/admin/orderemployee/${item.employee_id}">Orders assigned</a>
-<a href="/bhanu/admin/paysalary/${item.employee_id}">Pay salary</a><br><br>
+Status: ${item.enabled }<br>
+<a href="/bhanu/admin/orderemployee/${item.employee_id}">Orders assigned</a><br>
+<a href="/bhanu/admin/employeesalaryrecords/${item.employee_id }">Salary record</a><br>
+<a href="/bhanu/admin/empstatuschange/${item.employee_id }">Change Status</a><br>
+<a href="/bhanu/admin/paysalary/${item.employee_id}">Pay salary</a><br><br><br>
 </c:forEach>
 </body>
 </html>

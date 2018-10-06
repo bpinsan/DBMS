@@ -23,8 +23,9 @@
 <form action="order/${net_price }">
 
 	<input type="hidden" value="${offer_id }" name="offer_id"><br>
-	<input type="text" value="${details }" name="details">
-	<input type="number" value="${pincode }" name="pincode">
+	User name: <input type="text" name="username"><br><br>
+	Details:<input type="text"  name="details"><br><br>
+	Pin code:<input type="number" name="pincode"><br><br>
 	<input type="submit" value="Place order"><br><br>
 
 </form>

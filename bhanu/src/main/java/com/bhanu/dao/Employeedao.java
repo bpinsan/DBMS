@@ -11,4 +11,6 @@ public interface Employeedao {
 	public void Save(Employee employee);
 	public List<Employee> getAllEmployee();
 	public Employee getEmployee(int employee_id);
+	public void UpdateStatus(int employee_id);
+	public List<Employee> getAllAvailEmployee();
 }

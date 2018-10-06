@@ -7,7 +7,7 @@ import com.bhanu.model.OrderItem;
 
 public interface Orderdao {
 	
-	public int placeOrder(String Username,int Total_price,int Grand_total,int Offer_id);
+	public int placeOrder(String Username,int Total_price,int Grand_total,int Offer_id,String details,int pincode,String date);
 	public List<Order> getOrders(String Username);
 	public List<OrderItem> getOrderItems(int Order_Id);
 	public void addToOrder(int Order_Id,int Product_id,int Quantity);
@@ -16,4 +16,5 @@ public interface Orderdao {
 	public Order getOrder(int Order_Id);
 	public List<Order> getAllunassignedOrders();
 	public List<Order> getAssignedOrders(int employee_id);
+	
 }

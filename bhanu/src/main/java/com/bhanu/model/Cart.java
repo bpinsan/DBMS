@@ -12,6 +12,14 @@ public class Cart {
 	@Max(5)
 	int Quantity;
 	int Offer_id;
+	String Correspondence;
+	String Category;
+	String Brand;
+	String Type;
+	String Size;
+	int Price;
+	
+	
 	public Cart()
 	{
 		
@@ -39,6 +47,42 @@ public class Cart {
 	}
 	public void setOffer_id(int offer_id) {
 		Offer_id = offer_id;
+	}
+	public String getCorrespondence() {
+		return Correspondence;
+	}
+	public void setCorrespondence(String correspondence) {
+		Correspondence = correspondence;
+	}
+	public String getCategory() {
+		return Category;
+	}
+	public void setCategory(String category) {
+		Category = category;
+	}
+	public String getBrand() {
+		return Brand;
+	}
+	public void setBrand(String brand) {
+		Brand = brand;
+	}
+	public String getType() {
+		return Type;
+	}
+	public void setType(String type) {
+		Type = type;
+	}
+	public String getSize() {
+		return Size;
+	}
+	public void setSize(String size) {
+		Size = size;
+	}
+	public int getPrice() {
+		return Price;
+	}
+	public void setPrice(int price) {
+		Price = price;
 	}
 	
 }

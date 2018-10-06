@@ -19,6 +19,10 @@ public class Customer {
 	String Gender;
 	String Details;
 	int pincode;
+	int enabled;
+	
+	
+	
 	public Customer(String uname,String pass,String mpass) {
 		this.Username=uname;
 		this.Password=pass;
@@ -86,5 +90,13 @@ public class Customer {
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
 	}
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+	
+	
 	
 }
